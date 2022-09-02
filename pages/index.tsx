@@ -1,8 +1,8 @@
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import type { NextPage } from "next";
 import { useCallback, useRef, useState } from "react";
-import Geocoder from "react-map-gl-geocoder";
 import Map from "react-map-gl";
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import GeocoderControl from "./Geocoder";
 
 type Test = {
   latitude: number;
@@ -11,12 +11,12 @@ type Test = {
 };
 
 const Home: NextPage = () => {
-  const mapRef = useRef(null);
   const [viewport, setViewport] = useState<Test>({
     latitude: 35.6762,
     longitude: 139.6503,
     zoom: 8,
   });
+  const mapRef = useRef(null);
   const handleViewportChange = useCallback(
     (newViewport: Test) => setViewport(newViewport),
     []
@@ -34,46 +34,21 @@ const Home: NextPage = () => {
     [handleViewportChange]
   );
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ height: "100vh" }}>
       <Map
         initialViewState={{
-          longitude: -122.4,
-          latitude: 37.8,
-          zoom: 14,
+          longitude: -79.4512,
+          latitude: 43.6568,
+          zoom: 13,
         }}
-        style={{ width: "100%", height: "100%" }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
+        mapStyle="mapbox://styles/mapbox/dark-v9"
         mapboxAccessToken="pk.eyJ1IjoidGFpc2VpLW0iLCJhIjoiY2w2eWh4NnZlMHB6cDNkbXV1ZDQycTNrMyJ9.ull5IDeDxKcNo7GZQquZdg"
       >
-        {/* <Geocoder
-          mapRef={mapRef}
-          onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken="pk.eyJ1IjoidGFpc2VpLW0iLCJhIjoiY2w2eWh4NnZlMHB6cDNkbXV1ZDQycTNrMyJ9.ull5IDeDxKcNo7GZQquZdg"
+        <GeocoderControl
+          mapboxAccessToken="pk.eyJ1IjoidGFpc2VpLW0iLCJhIjoiY2w2eWh4NnZlMHB6cDNkbXV1ZDQycTNrMyJ9.ull5IDeDxKcNo7GZQquZdg"
           position="top-left"
-          types="poi"
-          marker={true}
-        /> */}
+        />
       </Map>
-      {/* <Map
-        ref={mapRef}
-        {...viewport}
-        width="100%"
-        height="100%"
-        onViewportChange={handleViewportChange}
-        mapStyle="mapbox://styles/taisei-m/cl6lh9446000h14pebx8w9o75"
-        mapboxApiAccessToken="pk.eyJ1IjoidGFpc2VpLW0iLCJhIjoiY2w2eWh4NnZlMHB6cDNkbXV1ZDQycTNrMyJ9.ull5IDeDxKcNo7GZQquZdg"
-      >
-        <Geocoder
-          mapRef={mapRef}
-          onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken="pk.eyJ1IjoidGFpc2VpLW0iLCJhIjoiY2w2eWh4NnZlMHB6cDNkbXV1ZDQycTNrMyJ9.ull5IDeDxKcNo7GZQquZdg"
-          position="top-left"
-          types="poi"
-          marker={true}
-        /> */}
-      {/* <GeolocateControl label="現在地" />
-        <NavigationControl /> */}
-      {/* </Map> */}
     </div>
   );
 };
